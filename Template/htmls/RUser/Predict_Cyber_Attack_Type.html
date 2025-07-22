@@ -1,0 +1,176 @@
+{% extends 'RUser/Header.html' %}
+{% block userblock %}
+
+
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+
+
+
+		<style>
+			body {background-color:#000000;}
+			.container-fluid {padding:50px;}
+			.container{background-color:white;padding:50px;   }
+			#title{font-family: 'Fredoka One', cursive;
+}
+			.text-uppercase{
+			font-family: 'Righteous', cursive;
+
+			}
+			.tweettext{
+
+    border: 2px solid yellowgreen;
+    width: 904px;
+    height: 202px;
+    overflow: scroll;
+    background-color:;
+}
+		.style1 {
+	color: #FF0000;
+	font-weight: bold;
+}
+.style4 {color: #FFFF00; font-weight: bold; }
+.style6 {
+	font-size: 24px;
+	color: #FFFF00;
+	font-weight: bold;
+}
+        .style7 {color: #FFFF00}
+        </style>
+
+	<body>
+	<div class="container-fluid">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-5">
+
+                   <form role="form" method="POST" >
+						{% csrf_token %}
+						<fieldset>
+							<p class="text-uppercase pull-center style1">PREDICTION OF CYBER ATTACK TYPE!!! </p>
+                            <hr>
+
+                                {% csrf_token %}
+                                <table width="1122" align="center">
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Enter Fid</div></td>
+                                    <td><input type="text" name="Fid"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Timestamp</div></td>
+                                    <td><input type="text" name="Timestamp"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Enter Source_IP_Address</div></td>
+                                    <td><input type="text" name="Source_IP_Address"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Destination_IP_Address</div></td>
+                                    <td><input type="text" name="Destination_IP_Address"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Enter Source_Port</div></td>
+                                    <td><input type="text" name="Source_Port"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Destination_Port</div></td>
+                                    <td><input type="text" name="Destination_Port"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Select Protocol</div></td>
+                                    <td><select name="Protocol">
+                                      <option>---Select---</option>
+                                      <option>TCP</option>
+                                      <option>UDP</option>
+                                      <option>ICMP</option>
+                                    </select>                                    </td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Packet_Length</div></td>
+                                    <td><input type="text" name="Packet_Length"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Enter Packet_Type</div></td>
+                                    <td><input type="text" name="Packet_Type"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Traffic_Type</div></td>
+                                    <td><input type="text" name="Traffic_Type"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Enter Payload_Data</div></td>
+                                    <td><input type="text" name="Payload_Data"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Malware_Indicators</div></td>
+                                    <td><input type="text" name="Malware_Indicators"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">
+                                      <div align="center">Enter Anomaly_Scores	</div>
+                                    </div></td>
+                                    <td><input type="text" name="Anomaly_Scores"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Alerts_Warnings	</div></td>
+                                    <td><input type="text" name="Alerts_Warnings"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">
+                                      <div align="center">Enter Attack_Signature</div>
+                                    </div></td>
+                                    <td><input type="text" name="Attack_Signature"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Action_Taken</div></td>
+                                    <td><input type="text" name="Action_Taken"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Enter Severity_Level</div></td>
+                                    <td><input type="text" name="Severity_Level"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style7">Enter Device_Information</div></td>
+                                    <td><input type="text" name="Device_Information"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4"><span class="style2">Enter </span>Network_Segment </div></td>
+                                    <td><input type="text" name="Network_Segment"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style4">Enter Geo_City_location_Data </div></td>
+                                    <td><input type="text" name="Geo_City_location_Data"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Enter Proxy_Information</div></td>
+                                    <td><input type="text" name="Proxy_Information"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style4">Enter Firewall_Logs</div></td>
+                                    <td><input type="text" name="Firewall_Logs"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="44" bgcolor="#FF0000"><div align="center" class="style4">Enter IDS_IPS_Alerts</div></td>
+                                    <td><input type="text" name="IDS_IPS_Alerts"></td>
+                                    <td bgcolor="#FF0000"><div align="center" class="style4">Enter Log_Source</div></td>
+                                    <td><input type="text" name="Log_Source"></td>
+                                  </tr>
+                                  <tr>
+                                    <td width="287" height="44" bgcolor="#FF0000"><div align="center" class="style4"></div></td>
+                                    <td width="269"><input name="submit" type="submit" class="style1" value="Predict"></td>
+                                    <td width="269">&nbsp;</td>
+                                    <td width="269">&nbsp;</td>
+                                  </tr>
+                                </table>
+					 </fieldset>
+				  </form>
+
+
+ 					<form role="form" method="POST" >
+						{% csrf_token %}
+						<fieldset>
+
+                            <hr>
+                            <div>
+                              <table width="866" height="94" border="0" align="center" >
+                                    <tr><td width="588" bgcolor="#FF0000"><div align="center"><span class="style6">PREDICTED CYBER ATTACK TYPE </span>:: </div></td>
+
+                                      <td width="268" bgcolor="#FFFFFF" style="color:red; font-size:20px; font-family:fantasy" ><div align="center">{{objs}}</div></td></tr>
+                      </table>
+
+                            </div>
+
+						</fieldset>
+					</form>
+				</div>
+
+				<div class="col-md-2">
+					<!-------null------>
+				</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    <tr>
