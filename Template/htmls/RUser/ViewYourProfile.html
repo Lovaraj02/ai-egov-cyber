@@ -1,0 +1,142 @@
+{% extends 'RUser/Header.html' %}
+{% block userblock %}
+
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4f6f9;
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+    }
+
+    .profile-container {
+        max-width: 900px;
+        margin: 50px auto;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    /* Header / Cover */
+    .profile-header {
+        background: linear-gradient(135deg, #44b9e3, #ff6b6b);
+        height: 180px;
+        position: relative;
+    }
+
+    /* Profile Picture */
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 5px solid #fff;
+        position: absolute;
+        bottom: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: url("https://cdn-icons-png.flaticon.com/512/149/149071.png") no-repeat center/cover;
+    }
+
+    /* User Name */
+    .profile-name {
+        text-align: center;
+        margin-top: 70px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #222;
+    }
+
+    .profile-subtitle {
+        text-align: center;
+        font-size: 15px;
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    /* Profile Details Section */
+    .profile-body {
+        padding: 20px 30px 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .detail-card {
+        background: #f9fafc;
+        border-radius: 12px;
+        padding: 16px 20px;
+        transition: 0.3s;
+        border: 1px solid #eee;
+    }
+
+    .detail-card:hover {
+        background: #fff0f0;
+        transform: translateY(-4px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .detail-label {
+        font-size: 13px;
+        color: #6c757d;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .detail-value {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2a9d8f;
+    }
+</style>
+
+<body>
+    <div class="profile-container">
+        <!-- Header -->
+        <div class="profile-header">
+            <div class="profile-pic"></div>
+        </div>
+
+        <!-- Name + Subtitle -->
+        <h2 class="profile-name">{{object.username}}</h2>
+        <p class="profile-subtitle">{{object.email}}</p>
+
+        <!-- Details -->
+        <div class="profile-body">
+            <div class="detail-card">
+                <div class="detail-label">Mobile</div>
+                <div class="detail-value">{{object.phoneno}}</div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-label">Gender</div>
+                <div class="detail-value">{{object.gender}}</div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-label">Address</div>
+                <div class="detail-value">{{object.address}}</div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-label">Country</div>
+                <div class="detail-value">{{object.country}}</div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-label">State</div>
+                <div class="detail-value">{{object.state}}</div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-label">City</div>
+                <div class="detail-value">{{object.city}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

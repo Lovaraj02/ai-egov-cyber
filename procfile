@@ -1,0 +1,1 @@
+web: gunicorn the_influence_of_artificial_intelligence.wsgi:application
