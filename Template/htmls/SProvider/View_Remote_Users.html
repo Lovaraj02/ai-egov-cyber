@@ -3,75 +3,131 @@
 
 <link rel="icon" href="images/icon.png" type="image/x-icon" />
 
-	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
 
+<style>
+    body {
+        background-color: #000000;
+        font-family: 'Righteous', cursive;
+    }
 
+    .container-fluid {
+        padding: 40px;
+    }
 
-		<style>
-			body {background-color:#000000;}
-			.container-fluid {padding:50px;}
-			.container{background-color:white;padding:50px;   }
-			#title{font-family: 'Fredoka One', cursive;
-}
-			.text-uppercase{
-			font-family: 'Righteous', cursive;
+    .container {
+        background: linear-gradient(135deg, #ffffff, #f1f1f1);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0px 8px 20px rgba(255, 0, 0, 0.3);
+    }
 
-			}
-			input{
-			font-family:'Russo One', sans-serif;
-			font-size:15px;
-			}
+    #title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 26px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 25px;
+        color: #ff0000;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
 
-		.style1 {color: #FF0000}
-        </style>
+    .table-container {
+        overflow-x: auto;
+    }
 
-	<body>
-	<div class="container-fluid">
-		<div class="container">
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        /* background-color: #1e1e1e; */
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-			<div class="row">
-				<div class="col-md-5">
- 					<form role="form" method="POST" >
-						{% csrf_token %}
-						<fieldset>
-							<p class="text-uppercase pull-center style1">VIEW ALL REMOTE USERS !!! </p>
-                            <div class="viewclients">
-							  <table>
-								<tr>
-									<th bgcolor="#FF0000" style="color:yellow">USER NAME</th>
-									<th bgcolor="#FF0000" style="color:yellow">EMAIL</th>
-									<th bgcolor="#FF0000" style="color:yellow">Gender</th>
-									<th bgcolor="#FF0000" style="color:yellow">Address</th>
-									<th bgcolor="#FF0000" style="color:yellow">Mob No</th>
-									<th bgcolor="#FF0000" style="color:yellow">Country</th>
-									<th bgcolor="#FF0000" style="color:yellow">State</th>
-									<th bgcolor="#FF0000" style="color:yellow">City</th>
-								</tr>
-								<tr>
-								{% for o in objects %}
-									<td bgcolor="#FFFFFF" style="color:white"><span class="style1">{{o.username}}</span></td>
-									<td bgcolor="#FFFFFF" style="color:white"><span class="style1">{{o.email}}</span></td>
-									<td bgcolor="#FFFFFF" style="color:white"><span class="style1">{{o.gender}}</span></td>
-									<td bgcolor="#FFFFFF" style="color:white"><span class="style1">{{o.address}}</span></td>
-									<td bgcolor="#FFFFFF" style="color:white"><span class="style1">{{o.phoneno}}</span></td>
-									<td bgcolor="#FFFFFF" style="color:white"><span class="style1">{{o.country}}</span></td>
-									<td bgcolor="#FFFFFF" style="color:white"><span class="style1">{{o.state}}</span></td>
-									<td bgcolor="#FFFFFF" style="color:white"><span class="style1">{{o.city}}</span></td>
-								</tr>
-								{% endfor %}
-							</table>
+    th {
+        background: linear-gradient(45deg, #a6d8b7, #81d57d);
+        color: rgb(11, 11, 11);
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
 
-						</div>
-					  </fieldset>
-					</form>
-				</div>
+    td {
+        text-align: center;
+        padding: 12px;
+        color: white;
+        font-size: 14px;
+    }
 
-				<div class="col-md-2">
-					<!-------null------>
-				</div>
+    tr:nth-child(even) {
+        background-color: #2b2b2b;
+    }
+
+    tr:hover {
+        background: rgba(211, 127, 127, 0.6);
+        transform: scale(1.01);
+        transition: 0.2s ease-in-out;
+    }
+
+    .style1 {
+        color: #20609d;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        #title {
+            font-size: 20px;
+        }
+        th, td {
+            font-size: 12px;
+            padding: 8px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <p id="title">View All Remote Users</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th>Mob No</th>
+                            <th>Country</th>
+                            <th>State</th>
+                            <th>City</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for o in objects %}
+                        <tr>
+                            <td><span class="style1">{{ o.username }}</span></td>
+                            <td><span class="style1">{{ o.email }}</span></td>
+                            <td><span class="style1">{{ o.gender }}</span></td>
+                            <td><span class="style1">{{ o.address }}</span></td>
+                            <td><span class="style1">{{ o.phoneno }}</span></td>
+                            <td><span class="style1">{{ o.country }}</span></td>
+                            <td><span class="style1">{{ o.state }}</span></td>
+                            <td><span class="style1">{{ o.city }}</span></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" style="color: #ff4d4d; font-weight: bold;">No Users Found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</body>
 {% endblock %}
