@@ -121,21 +121,6 @@
     </div>
 </div>
 
-<!-- JS for live update every 3 seconds -->
-<!-- <script>
-function fetchLatestPacket() {
-    fetch("{% url 'Predict_Cyber_Attack_Type' %}")
-      .then(response => response.text())
-      .then(html => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          const newForm = doc.getElementById('packet-info');
-          if (newForm) {
-              document.getElementById('packet-info').innerHTML = newForm.innerHTML;
-          }
-      });
-}
-setInterval(fetchLatestPacket, 3000);
-</script> -->
+
 
 {% endblock %}
