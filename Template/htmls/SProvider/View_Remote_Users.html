@@ -2,86 +2,126 @@
 {% block researchblock %}
 
 <link rel="icon" href="images/icon.png" type="image/x-icon" />
-
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
     body {
-        background-color: #000000;
-        font-family: 'Righteous', cursive;
+        background-color: #0b0c10;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #eaeaea;
+        overflow: hidden; /* prevent page scroll */
     }
 
     .container-fluid {
-        padding: 40px;
+        padding: 50px 20px;
+        height: calc(100vh - 70px); /* full height minus navbar */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .container {
-        background: linear-gradient(135deg, #ffffff, #f1f1f1);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0px 8px 20px rgba(255, 0, 0, 0.3);
+        background: linear-gradient(145deg, #1f2833, #2b313b);
+        padding: 40px 35px;
+        border-radius: 16px;
+        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
+        max-width: 1150px;
+        width: 100%;
+        height: 80vh; /* fixed height */
+        display: flex;
+        flex-direction: column;
     }
 
     #title {
-        font-family: 'Fredoka One', cursive;
-        font-size: 26px;
-        font-weight: bold;
+        font-size: 28px;
+        font-weight: 700;
         text-align: center;
-        margin-bottom: 25px;
-        color: #ff0000;
+        color: #66fcf1;
         text-transform: uppercase;
         letter-spacing: 2px;
+        margin-bottom: 15px;
     }
 
     .table-container {
+        flex: 1;
+        overflow-y: auto; /* scroll only inside this */
         overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid #2b3a42;
+        scrollbar-width: thin;
+        scrollbar-color: #45a29e #1f2833;
+    }
+
+    .table-container::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: #45a29e;
+        border-radius: 5px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: #1f2833;
     }
 
     table {
         width: 100%;
         border-collapse: collapse;
-        /* background-color: #1e1e1e; */
         border-radius: 10px;
         overflow: hidden;
     }
 
     th {
-        background: linear-gradient(45deg, #a6d8b7, #81d57d);
-        color: rgb(11, 11, 11);
+        background: #45a29e;
+        color: #0b0c10;
         text-align: center;
         padding: 12px;
         font-size: 14px;
         text-transform: uppercase;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+        z-index: 2; /* keeps header visible while scrolling */
     }
 
     td {
         text-align: center;
         padding: 12px;
-        color: white;
         font-size: 14px;
+        color: #c5c6c7;
+        background-color: #1f2833;
+        border-bottom: 1px solid #2c3e50;
+        transition: background 0.3s ease;
     }
 
-    tr:nth-child(even) {
-        background-color: #2b2b2b;
+    tr:hover td {
+        background-color: rgba(69, 162, 158, 0.25);
     }
 
-    tr:hover {
-        background: rgba(211, 127, 127, 0.6);
-        transform: scale(1.01);
-        transition: 0.2s ease-in-out;
+    tr:nth-child(even) td {
+        background-color: #202833;
     }
 
-    .style1 {
-        color: #20609d;
-        font-weight: bold;
+    @media (max-width: 992px) {
+        #title {
+            font-size: 22px;
+        }
+
+        th, td {
+            font-size: 13px;
+            padding: 10px;
+        }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
         #title {
             font-size: 20px;
         }
+
         th, td {
             font-size: 12px;
             padding: 8px;
@@ -110,18 +150,18 @@
                     <tbody>
                         {% for o in objects %}
                         <tr>
-                            <td><span class="style1">{{ o.username }}</span></td>
-                            <td><span class="style1">{{ o.email }}</span></td>
-                            <td><span class="style1">{{ o.gender }}</span></td>
-                            <td><span class="style1">{{ o.address }}</span></td>
-                            <td><span class="style1">{{ o.phoneno }}</span></td>
-                            <td><span class="style1">{{ o.country }}</span></td>
-                            <td><span class="style1">{{ o.state }}</span></td>
-                            <td><span class="style1">{{ o.city }}</span></td>
+                            <td>{{ o.username }}</td>
+                            <td>{{ o.email }}</td>
+                            <td>{{ o.gender }}</td>
+                            <td>{{ o.address }}</td>
+                            <td>{{ o.phoneno }}</td>
+                            <td>{{ o.country }}</td>
+                            <td>{{ o.state }}</td>
+                            <td>{{ o.city }}</td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="8" style="color: #ff4d4d; font-weight: bold;">No Users Found</td>
+                            <td colspan="8" style="color: #ff6666; font-weight: bold;">No Users Found</td>
                         </tr>
                         {% endfor %}
                     </tbody>

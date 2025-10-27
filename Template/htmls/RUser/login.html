@@ -1,185 +1,310 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 {% load static %}
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Login</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | AI E-Gov Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      /* background: linear-gradient(135deg, #fff1f0, #ffe4e1); */
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
 
-  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static 'coin-slider.css' %}" />
+    /* Navbar */
+    .navbar {
+      background-color: #ff4b2b;
+      padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .navbar-brand {
+      color: white !important;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+    .navbar-nav .nav-link {
+      color: white !important;
+      margin-right: 20px;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ffe4e1 !important;
+    }
 
-  <script type="text/javascript" src="{% static 'cufon-yui.js' %}"></script>
-  <script type="text/javascript" src="{% static 'cufon-aller.js' %}"></script>
-  <script type="text/javascript" src="{% static 'jquery-1.4.2.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'script.js' %}"></script>
-  <script type="text/javascript" src="{% static 'coin-slider.min.js' %}"></script>
+    /* Login Card */
+    .main-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
 
-  <style type="text/css">
-    .style5 {
-      font-size: 24px;
-      color: #FF0000;
+    .login-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
     }
-    .style12 {
+
+    .login-card img {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+
+    .login-card h3 {
+      color: #ff4b2b;
       font-weight: bold;
+      margin-bottom: 25px;
     }
-    .style13 {
-      font-size: 24px;
-      color: #FF0000;
-      font-weight: bold;
+
+    .btn-primary {
+      background-color: #ff4b2b;
+      border: none;
+      transition: background 0.3s ease;
     }
-    .style16 {
-      color: #FF0000;
+    .btn-primary:hover {
+      background-color: #e03e26;
     }
-    .style20 {
-      color: #FF0000;
-      font-weight: bold;
+
+    .register-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #ff4b2b;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .register-link:hover {
+      color: #e03e26;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-<div class="main">
-  <div class="header">
-    <div class="header_resize">
-      <div class="menu_nav">
-        <p>&nbsp;</p>
-      </div>
-      <div class="mainbar">
-        <h1 align="center">
-          <a href="index.html">
-            <span class="content style5">
-              The Influence of Artificial Intelligence on E-Governance and Cybersecurity in Smart Cities
-            </span>
-          </a>
-        </h1>
 
-        <div class="tab-content tab-space">
-          <div class="tab-pane active" id="preview-alerts">
-
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-            <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-            <link href="https://unpkg.com/soft-ui-design-system@1.0.1/assets/css/soft-design-system.min.css" rel="stylesheet" />
-
-            <div class="container py-5">
-              <div class="row">
-                <div class="alert alert-primary text-white font-weight-bold" role="alert">
-                  <p align="center">
-                    <span class="active">
-                      <span class="style12">
-                        <a href="{% url 'index' %}">Home |</a>
-                        <a href="{% url 'login' %}"> Remote User </a> |
-                        <a href="{% url 'serviceproviderlogin' %}"> Service Provider </a>
-                      </span>
-                    </span>
-                  </p>
-                </div>
-                <div></div>
-              </div>
-            </div>
-
-            <img src="{% static 'Banner.jpg' %}" width="1297" height="355" alt="" class="fl" />
-          </div>
-          <div class="clr"></div>
-          <div class="slider"></div>
-          <div class="clr"></div>
-        </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        AI E-Gov Portal
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'Register1' %}">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'serviceproviderlogin' %}">Admin (Dashboard)</a></li>
+        </ul>
       </div>
     </div>
+  </nav>
 
-    <div class="content">
-      <div class="content_resize">
-        <div class="mainbar">
-          <div class="article">
-            <h2 align="center" class="style13">
-              Artificial intelligence, cybersecurity, e-Governance, stakeholder involvement,
-              machine learning, computer crime, smart cities, data privacy..
-            </h2>
+  <!-- Login Section -->
+  <div class="main-container">
+    <div class="login-card">
+      <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        <img src="{% static 'login.jpg' %}" alt="Login Icon">
+        <h3>User Login</h3>
 
-            <div class="img">
-              <div align="center">
-                <form method="POST" role="form" autocomplete="off">
-                  {% csrf_token %}
-                  <fieldset>
-                    {% load static %}
-                    <img src="{% static 'login.jpg' %}" alt="My image" />
-                    <p class="style5">Login Using Your Account:</p>
-
-                    <!-- 🛑 Fake hidden inputs to trick browser autofill -->
-                    <input type="text" name="fakeuser" id="fakeuser" style="display:none;" autocomplete="username">
-                    <input type="password" name="fakepass" id="fakepass" style="display:none;" autocomplete="new-password">
-
-                    <div class="form-group">
-                      <input type="text" name="username" autocomplete="off" placeholder="User Name" required />
-                      <br /><br />
-                    </div>
-
-                    <div class="form-group">
-                      <input type="password" name="password" autocomplete="new-password" placeholder="Password" required />
-                    </div>
-
-                    <div>
-                      <p>
-                        <input type="submit" name="submit1" class="btn btn-md" value="Login" />
-                        <br />
-                      </p>
-                    </div>
-
-                    <div>
-                      <button>
-                        <span class="style16"><strong>Are You New User !!</strong></span>
-                        <span class="style20">!</span>
-                        <a href="{% url 'Register1' %}">REGISTER</a>
-                      </button>
-                    </div>
-                  </fieldset>
-                </form>
-
-                <div class="mainbar">
-                  <div class="tab-content tab-space">
-                    <div class="tab-pane active" id="preview-alerts">
-                      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-                      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-                      <link href="https://unpkg.com/soft-ui-design-system@1.0.1/assets/css/soft-design-system.min.css" rel="stylesheet" />
-
-                      <div class="container py-5">
-                        <div class="row">
-                          <div class="alert alert-primary text-white font-weight-bold" role="alert">
-                            <p align="center">
-                              <span class="active">
-                                <span class="style12">
-                                  <a href="{% url 'login' %}">Home |</a>
-                                  <a href="{% url 'login' %}"> Remote User </a> |
-                                  <a href="{% url 'serviceproviderlogin' %}"> Service Provider </a>
-                                </span>
-                              </span>
-                            </p>
-                          </div>
-                          <div></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="post_content"></div>
-                <div class="clr"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sidebar">
-            <div class="searchform"></div>
-            <div class="clr"></div>
-          </div>
-
-          <div class="clr"></div>
+        <div class="mb-3 text-start">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
         </div>
-      </div>
-    </div>
 
-    <div class="fbg"></div>
-    <div class="footer"></div>
+        <div class="mb-3 text-start">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" name="submit1" class="btn btn-primary btn-lg w-100">Login</button>
+
+        <a href="{% url 'Register1' %}" class="register-link">New User? Register Here</a>
+      </form>
+    </div>
   </div>
-</div>
-<div align="center"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+
+
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | AI E-Gov Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #ff4b2b;
+      padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .navbar-brand {
+      color: white !important;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+    .navbar-nav .nav-link {
+      color: white !important;
+      margin-right: 20px;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ffe4e1 !important;
+    }
+
+    /* Center Card */
+    .main-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .login-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px;
+      max-width: 450px;
+      width: 100%;
+      margin: 20px;
+      text-align: center;
+    }
+
+    .login-card img {
+      width: 80px;
+      display: block;
+      margin: 0 auto 15px;
+    }
+
+    .login-card h3 {
+      text-align: center;
+      font-weight: bold;
+      color: #ff4b2b;
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background-color: #ff4b2b;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #e03e26;
+    }
+
+    .register-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #ff4b2b;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .register-link:hover {
+      color: #e03e26;
+    }
+
+    @media (max-height: 700px) {
+      .main-container {
+        align-items: flex-start;
+        padding-top: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  Navbar -->
+  <!-- <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">AI E-Gov Portal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Register1' %}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'serviceproviderlogin' %}">Admin (Dashboard)</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Section -->
+  <!-- <div class="main-container">
+    <div class="login-card">
+      <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        <img src="{% static 'login.jpg' %}" alt="Login">
+        <h3>User Login</h3>
+
+        <div class="mb-3 text-start">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
+        </div>
+
+        <div class="mb-3 text-start">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-100">Login</button>
+
+        <a href="{% url 'Register1' %}" class="register-link">New User? Register Here</a>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> -->

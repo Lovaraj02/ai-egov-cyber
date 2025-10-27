@@ -1,66 +1,98 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
-<body>
 <head>
-    <meta charset="UTF-8">
-    <title>Remote User</title>
-<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
-<style>
-      body{background: url("{% static 'bg.jpg' %}");
-	background-size:cover;
-	font-family: 'Russo One', sans-serif;
-	background-color: #000000;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Cyber Portal</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1{
-    color:white;
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      color: #333;
+      overflow: hidden; /* fully removes vertical and horizontal scroll */
     }
-.topnav {
-  overflow: hidden;
-  background-color: #812;
-}
 
-.topnav a {
-  float: left;
-  color: #FFFFFF;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
+    /* Navbar (Orange Theme) */
+    .navbar {
+      background-color: #ff4b2b;
+      padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
 
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
+    .navbar-brand {
+      color: white !important;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
 
-.topnav a.active {
-  background-color: #8e4fd1;
-  color: white;
-}
-.style1 {color: #FF0000}
-</style>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+    .navbar-nav .nav-link {
+      color: white !important;
+      margin-right: 20px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ffe4e1 !important;
+    }
+
+    /* Main Content */
+    .mainholder {
+      padding: 30px;
+      background: transparent;
+      height: calc(100vh - 70px);
+      overflow: hidden; /* ensures no inner scroll too */
+    }
+
+    @media (max-width: 768px) {
+      .mainholder {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
 <body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">AI Cyber Portal</a>
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
 
-<h1 align="center" class="style1">The Influence of Artificial Intelligence on E-Governance and Cybersecurity in Smart Cities</h1>
-<div class="tab-content tab-space">
-            <div class="tab-pane active" id="preview-alerts">
-
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,500,500,200" rel="stylesheet" />
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-                <link href="https://unpkg.com/soft-ui-design-system@1.0.1/assets/css/soft-design-system.min.css" rel="stylesheet" /><div class="container py-5">
-    <div class="alert alert-success text-white font-weight-bold" role="alert">
-        <a  href="{% url 'Predict_Cyber_Attack_Type' %}">PREDICT CYBER ATTACK TYPE</a>||
-         <a href="{% url 'ViewYourProfile' %}">VIEW YOUR PROFILE</a>||
-         <a href="{% url 'index' %}">LOGOUT</a>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'Predict_Cyber_Attack_Type' %}">Predict Cyber Attack</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'ViewYourProfile' %}">View Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Logout</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</div>
+  </nav>
 
-<div class="mainholder">
-{% block userblock %}
-{% endblock %}
-</div>
+  <!-- Page Content -->
+  <div class="mainholder">
+    {% block userblock %}
+    {% endblock %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

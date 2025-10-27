@@ -1,6 +1,7 @@
 from django.db.models import Count
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
@@ -38,8 +39,8 @@ def Add_DataSet_Details(request):
     return render(request, 'RUser/Add_DataSet_Details.html', {"excel_data": ''})
 
 
-def Register1(request):
 
+def Register1(request):
     if request.method == "POST":
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -50,13 +51,28 @@ def Register1(request):
         city = request.POST.get('city')
         address = request.POST.get('address')
         gender = request.POST.get('gender')
-        ClientRegister_Model.objects.create(username=username, email=email, password=password, phoneno=phoneno,
-                                            country=country, state=state, city=city,address=address,gender=gender)
 
-        obj = "Registered Successfully"
-        return render(request, 'RUser/Register1.html',{'object':obj})
-    else:
-        return render(request,'RUser/Register1.html')
+        # Save to database
+        ClientRegister_Model.objects.create(
+            username=username,
+            email=email,
+            password=password,
+            phoneno=phoneno,
+            country=country,
+            state=state,
+            city=city,
+            address=address,
+            gender=gender
+        )
+
+        # Show success message
+        messages.success(request, '✅ Registered Successfully! Redirecting to Login...')
+
+        # Redirect to login after 3 seconds
+        return render(request, 'RUser/Register1.html', {'redirect_to_login': True})
+
+    return render(request, 'RUser/Register1.html')
+
 
 def ViewYourProfile(request):
     userid = request.session['userid']

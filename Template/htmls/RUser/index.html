@@ -1,113 +1,142 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 {% load static %}
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Home Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI & Cybersecurity Portal</title>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <link rel="stylesheet"  type="text/css" href="{% static 'style.css'%} "  />
-<link rel="stylesheet"   type="text/css" href="{% static 'coin-slider.css'%}" />
-
-<script type="text/javascript" src="{% static 'cufon-yui.js'%} "></script>
-<script type="text/javascript" src="{% static 'cufon-aller.js'%}"></script>
-<script type="text/javascript" src="{% static 'jquery-1.4.2.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'script.js'%}"></script>
-<script type="text/javascript" src="{% static 'coin-slider.min.js'%}"></script>
-<script src="http://localhost:35729/livereload.js"></script>
-
-<style type="text/css">
-<!--
-.style5 {
-	font-size: 24px;
-	color: #FF0000;
-}
-.style12 {font-weight: bold}
-.style13 {font-size: 24px; color: #FF0000; font-weight: bold; }
-.style16 {
-	color: #FF0000;
-	font-weight: bold;
-}
-
-
-
-
-    .post_content {
-      background-color: white;
-      padding: 25px;
-      border-radius: 10px;
-      max-width: 800px;
-      margin: auto;
-      margin-top: 50px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      color: #333;
     }
 
-    .post_content ul {
-      list-style-type: disc;
-      padding-left: 20px;
+    .navbar {
+      background-color: #ff4b2b;
+      padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .post_content li {
-      margin-bottom: 10px;
-      line-height: 1.6;
+    .navbar-brand {
+      color: white !important;
+      font-weight: bold;
+      font-size: 1.3rem;
     }
 
-    h2 {
+    .navbar-nav .nav-link {
+      color: white !important;
+      margin-right: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ffe4e1 !important;
+    }
+
+    .banner-container {
       text-align: center;
-      margin-bottom: 20px;
-      color: #ffd700;
+      margin-top: 40px;
     }
 
+    .banner-img {
+      width: 80%;
+      max-width: 700px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease;
+    }
 
--->
-</style>
+    .banner-img:hover {
+      transform: scale(1.03);
+    }
+
+    .content-box {
+      background: #ffffff;
+      color: #333;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      max-width: 900px;
+      margin: 60px auto;
+      transition: transform 0.3s ease;
+    }
+
+    .content-box:hover {
+      transform: scale(1.02);
+    }
+
+    .content-box h2 {
+      text-align: center;
+      color: #ff4b2b;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .content-box ul {
+      list-style: disc;
+      padding-left: 25px;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #ff4b2b;
+      color: white;
+      margin-top: 60px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .banner-img {
+        width: 95%;
+      }
+      .content-box {
+        margin: 30px 15px;
+        padding: 25px;
+      }
+      .content-box h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="main">
-  <div class="header">
-    <div class="header_resize">
-      <div class="menu_nav">
-        <p>&nbsp;</p>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">AI E-Gov Portal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'serviceproviderlogin' %}">Admin (Dashboard)</a></li>
+        </ul>
       </div>
-      <div class="mainbar">
-        <h1 align="center"><a href="index.html"><span class="content style5">The Influence of Artificial Intelligence on E-Governance and Cybersecurity in Smart Cities</span></a></h1>
-
-
-
-        <div class="tab-content tab-space">
-            <div class="tab-pane active" id="preview-alerts">
-
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script><link href="https://unpkg.com/soft-ui-design-system@1.0.1/assets/css/soft-design-system.min.css" rel="stylesheet" /><div class="container py-5">
-  <div class="row">
-    <div class="alert alert-primary text-white font-weight-bold" role="alert">
-     <p align="center"><span class="active"><span class="style12"><a href="{% url 'index' %}">Home|  </a><a href="{% url 'login' %}">Remote User </a>|<a href="{% url 'serviceproviderlogin' %}"> Service Provider </a></span></span></p>
     </div>
-    <div>
-</div>
+  </nav>
 
-
-
-        <img src="{% static 'Banner.jpg'%}" width="1297" height="421" alt="" class="fl" />      </div>
-      <div class="clr"></div>
-      <div class="slider">
-        
-      </div>
-      <div class="clr"></div>
-    </div>
+  <!-- Banner -->
+  <div class="banner-container">
+    <img src="{% static 'Banner.jpg' %}" alt="AI and Cybersecurity" class="banner-img">
   </div>
-  <div class="content">
-    <div class="content_resize">
-      <div class="mainbar">
-        <div class="article">
-          <h2 align="center" class="style13"> Artificial intelligence, cybersecurity, e-Governance, stakeholder involvement, machine
-learning, computer crime, smart cities, data privacy..</h2>
-          <div class="img">
-            <div align="center"><img src="{% static 'img1.jpg'%}" width="630" height="221" alt="" class="fl" /></div>
-          </div>
-  <div class="post_content">
-    <h2>AI, e-Governance & Cybersecurity Summary</h2>
+
+  <!-- Main Content -->
+  <div class="content-box">
+    <h2>The Influence of Artificial Intelligence on E-Governance and Cybersecurity in Smart Cities</h2>
     <ul>
       <li>AI is vital in protecting systems from cyber threats like malware and phishing.</li>
       <li>Strengthens cybersecurity for governments and organizations via e-Governance.</li>
@@ -120,30 +149,12 @@ learning, computer crime, smart cities, data privacy..</h2>
     </ul>
   </div>
 
-        <div class="tab-content tab-space">
-            <div class="tab-pane active" id="preview-alerts">
+  <!-- Footer -->
+  <footer>
+    © 2025 Smart City AI Portal | All Rights Reserved
+  </footer>
 
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script><link href="https://unpkg.com/soft-ui-design-system@1.0.1/assets/css/soft-design-system.min.css" rel="stylesheet" /><div class="container py-5">
-  <div class="row">
-    <div class="alert alert-primary text-white font-weight-bold" role="alert">
-     <p align="center"><span class="active"><span class="style12"><a href="{% url 'login' %}">Home|  </a><a href="{% url 'login' %}">Remote User </a>|<a href="{% url 'serviceproviderlogin' %}"> Service Provider </a></span></span></p>
-    </div>
-    <div>
-</div>
-          <div class="clr"></div>
-        </div>
-      </div>
-      <div class="sidebar">
-        <div class="searchform"></div>
-        <div class="clr"></div>
-      </div>
-      <div class="clr"></div>
-    </div>
-  </div>
-  <div class="fbg"></div>
-  <div class="footer"></div>
-</div>
-<div align=center></div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

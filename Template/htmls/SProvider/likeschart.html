@@ -2,102 +2,122 @@
 {% block researchblock %}
 
 <style>
-    body{
-	background-color: #FFFFFF;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    background-color: #FFFFFF;
+    overflow-y: hidden; /* Removes vertical scroll */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+  }
+
+  .menu table {
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu table td {
+    background: #584b4f;
+    color: white;
+    padding: 15px;
+    transition: background 0.3s ease;
+  }
+
+  .menu table td:hover {
+    background: rgb(0, 0, 0);
+  }
+
+  .topic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+  }
+
+  .topic h1 {
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    font-size: 2rem;
+  }
+
+  .sidemenu {
+    margin-top: 0;
+    text-align: center;
+  }
+
+  .sidemenu h3 {
+    color: white;
+    margin: 0;
+  }
+
+  #chartContainer {
+    width: 80%;
+    max-width: 950px;
+    height: 70vh; /* Responsive height within screen */
+    margin-top: 30px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    #chartContainer {
+      width: 90%;
+      height: 65vh;
     }
-    .menu table{
-        width:100%;
-        text-align:center;
+  }
 
+  @media (max-width: 480px) {
+    #chartContainer {
+      width: 95%;
+      height: 60vh;
     }
-
-    .menu table td:hover{
-         background:rgb(0,0,0);
-    }
-
-     .menu table td{
-          background: #584b4f;
-     }
-
-     .menu table,.menu table th,.menu table td {
-          border: ;
-          border-collapse: collapse;
-     }
-
-     .menu table th,.menu table  td {
-          padding: 15px;
-     }
-     .topic h1{
-           color:white;
-           padding:2px;
-           text-align:center;
-           border-style:none;
-           height:100px;
-           width:1330px;
-           float:left;
-     }
-     #chartContainer{
-            width: 1020px;
-            margin-left: 150px;
-            margin-top: -354px;
-            position: fixed;
-     }
-     .sidemenu{
-     margin-top: 118px;
-     }
+  }
 </style>
-
 
 <script>
 window.onload = function() {
-
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	title: {
-		text: ""
-	},
-	data: [{
-	{% if chart_type == "rangeSplineArea" %}
-		type: "rangeSplineArea",
-	{% elif chart_type == "pie" %}
-		type: "pie",
-	{% elif chart_type == "spline" %}
-		type: "spline",
-	{% endif %}
-		startAngle: 240,
-		yValueFormatString: "##0.00\"%\"",
-		indexLabel: "{label} {y}",
-		dataPoints: [
-		{% for o in form %}
-			{y: {{o.dcount}}, label: "{{o.names}}"},
-		{% endfor %}
-		]
-	}]
-});
-chart.render();
-
+  var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    title: {
+      text: ""
+    },
+    data: [{
+      {% if chart_type == "rangeSplineArea" %}
+      type: "rangeSplineArea",
+      {% elif chart_type == "pie" %}
+      type: "pie",
+      {% elif chart_type == "spline" %}
+      type: "spline",
+      {% endif %}
+      startAngle: 240,
+      yValueFormatString: "##0.00\"%\"",
+      indexLabel: "{label} {y}",
+      dataPoints: [
+        {% for o in form %}
+          {y: {{o.dcount}}, label: "{{o.names}}"},
+        {% endfor %}
+      ]
+    }]
+  });
+  chart.render();
 }
-
 </script>
+
 <body>
-<br>
-<div class="topic">
-
-
-
-<div class="sidemenu">
-    
-	
-    <h3 style="color:white;margin-left:60px;margin-top:100px;">&nbsp;</h3>
-    <h3 style="color:white;margin-left:60px;margin-top:100px;"><br>
-      <br>
-      <br>
-	  <br>
-    <a href="{% url 'likeschart' 'bar' %}"></a></h3>
+  <div class="topic">
+    <div class="sidemenu">
+      <h3>&nbsp;</h3>
+      <a href="{% url 'likeschart' 'bar' %}"></a>
+    </div>
+    <div id="chartContainer" class="graph"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   </div>
-<div id="chartContainer" class="graph"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</div>
-
 </body>
+
 {% endblock %}
