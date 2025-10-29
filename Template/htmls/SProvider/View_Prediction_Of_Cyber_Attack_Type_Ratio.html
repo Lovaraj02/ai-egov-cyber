@@ -1,31 +1,28 @@
 {% extends 'SProvider/Header.html' %}
 {% block researchblock %}
 
+<!-- Font Imports -->
 <link rel="icon" href="images/icon.png" type="image/x-icon" />
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
   html, body {
-    background-color: #000000;
-    height: 100%;
-    overflow-y: hidden; /* ✅ removes vertical scroll */
+    /* background-color: #000000; */
     font-family: 'Righteous', cursive;
+    height: 100%;
+    margin: 0;
+    /* Do not use overflow-y: hidden! */
   }
 
-  .container-fluid {
+  /* --- Fix for content below sticky/fixed navbar --- */
+  .main-content {
+    padding-top: 85px;        /* equal to or greater than navbar height */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh; /* full height */
-    padding: 0;
+    align-items: flex-start;  /* aligns top, not center (prevents big gap) */
   }
 
   .container {
@@ -35,18 +32,16 @@
     max-width: 800px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    overflow-x: auto; /* allows horizontal scroll if table overflows */
+    overflow-x: auto;
+    margin-bottom: 40px;
   }
 
   .style1 {
     color: #FF0000;
+    font-family: 'Lobster', cursive;
     font-weight: bold;
     text-align: center;
     font-size: 22px;
-  }
-
-  .style7 {
-    color: #FFFF00;
   }
 
   table {
@@ -68,44 +63,47 @@
     background-color: #FF0000;
     color: #FFFF00;
     font-weight: bold;
+    font-family: 'Fredoka One', cursive;
   }
 
   table td {
     border: 2px solid #FF00FF;
   }
 
-  /* ✅ Responsive adjustments */
+  /* --- Responsive adjustments --- */
   @media (max-width: 768px) {
     .container {
       width: 95%;
       padding: 20px;
     }
-
     table th, table td {
       font-size: 16px;
       padding: 8px;
     }
+    .main-content {
+      padding-top: 70px;
+    }
   }
-
   @media (max-width: 480px) {
     .container {
       width: 100%;
       padding: 15px;
     }
-
     .style1 {
       font-size: 18px;
     }
-
     table th, table td {
       font-size: 14px;
       padding: 6px;
+    }
+    .main-content {
+      padding-top: 64px;
     }
   }
 </style>
 
 <body>
-  <div class="container-fluid">
+  <div class="main-content">
     <div class="container">
       <form role="form" method="POST">
         {% csrf_token %}
@@ -131,5 +129,4 @@
     </div>
   </div>
 </body>
-
 {% endblock %}

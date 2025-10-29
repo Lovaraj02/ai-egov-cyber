@@ -2,33 +2,22 @@
 {% block researchblock %}
 
 <style>
-  * {
+  html, body {
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    color: #333;
+    /* Remove overflow-y: hidden! */
   }
 
-  html, body {
-    background-color: #FFFFFF;
-    overflow-y: hidden; /* Removes vertical scroll */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 100%;
-  }
-
-  .menu table {
-    width: 100%;
-    text-align: center;
-  }
-
-  .menu table td {
-    background: #584b4f;
-    color: white;
-    padding: 15px;
-    transition: background 0.3s ease;
-  }
-
-  .menu table td:hover {
-    background: rgb(0, 0, 0);
+  .main-content {
+    padding-top: 85px;  /* matches navbar height, adjust if needed */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
   }
 
   .topic {
@@ -36,46 +25,101 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
+    width: 100%;
+    min-height: 70vh;
+  }
+
+  .menu table {
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+
+  .menu table td {
+    background: #ff4b2b;
+    color: white;
+    padding: 15px;
+    transition: background 0.3s ease;
+    font-weight: 500;
+    font-size: 1.1rem;
+    border: 1px solid #fff;
+  }
+
+  .menu table td:hover {
+    background: #ff784b;
   }
 
   .topic h1 {
-    color: white;
+    color: #ff4b2b;
     padding: 10px;
     text-align: center;
     width: 100%;
     font-size: 2rem;
+    font-family: inherit;
+    font-weight: 700;
   }
 
   .sidemenu {
     margin-top: 0;
     text-align: center;
+    padding: 10px 0;
+    width: 100%;
   }
 
   .sidemenu h3 {
-    color: white;
-    margin: 0;
+    color: #ff4b2b;
+    margin: -30px;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 
   #chartContainer {
     width: 80%;
     max-width: 950px;
+    min-height: 250px;
     height: 70vh; /* Responsive height within screen */
     margin-top: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+    padding: 20px;
   }
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
     #chartContainer {
-      width: 90%;
+      width: 95%;
       height: 65vh;
+      padding: 10px;
+    }
+    .main-content {
+      padding-top: 70px;
+    }
+    .menu table td {
+      font-size: 1rem;
+      padding: 8px;
     }
   }
 
   @media (max-width: 480px) {
     #chartContainer {
-      width: 95%;
+      width: 100%;
       height: 60vh;
+      padding: 4px;
+    }
+    .main-content {
+      padding-top: 62px;
+    }
+    .menu table td {
+      font-size: 0.95rem;
+      padding: 5px;
+    }
+    .topic h1 {
+      font-size: 1.25rem;
     }
   }
 </style>
@@ -110,14 +154,20 @@ window.onload = function() {
 </script>
 
 <body>
-  <div class="topic">
-    <div class="sidemenu">
-      <h3>&nbsp;</h3>
-      <a href="{% url 'likeschart' 'bar' %}"></a>
+  <div class="main-content">
+    <div class="topic">
+      <div class="sidemenu">
+        <h3>Bar Chart</h3>
+        <!-- <a href="{% url 'likeschart' 'bar' %}">Bar Chart</a> -->
+      </div>
+      <div id="chartContainer" class="graph"></div>
+      <div class="menu">
+        <table>
+          <!-- Example: Add table if you want chart summary -->
+        </table>
+      </div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </div>
-    <div id="chartContainer" class="graph"></div>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   </div>
 </body>
-
 {% endblock %}

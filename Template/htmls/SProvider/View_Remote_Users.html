@@ -5,169 +5,182 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        background-color: #0b0c10;
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        color: #eaeaea;
-        overflow: hidden; /* prevent page scroll */
-    }
+  html, body {
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    min-height: 100vh;
+  }
 
-    .container-fluid {
-        padding: 50px 20px;
-        height: calc(100vh - 70px); /* full height minus navbar */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  /* Content below sticky navbar */
+  .main-content {
+    padding-top: 85px;      /* matches navbar height, adjust if needed */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
 
-    .container {
-        background: linear-gradient(145deg, #1f2833, #2b313b);
-        padding: 40px 35px;
-        border-radius: 16px;
-        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
-        max-width: 1150px;
-        width: 100%;
-        height: 80vh; /* fixed height */
-        display: flex;
-        flex-direction: column;
-    }
+  .container {
+    background: #fff;                              /* lighter background */
+    padding: 40px 35px;
+    border-radius: 16px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.09);  /* soft shadow */
+    max-width: 1150px;
+    width: 100%;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+  }
 
+  #title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    color: #ff4b2b;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .table-container {
+    flex: 1;
+    overflow-y: auto; /* scroll only inside this */
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    background: none;
+    scrollbar-width: thin;
+    scrollbar-color: #ff4b2b #fdfbfb;
+  }
+
+  .table-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .table-container::-webkit-scrollbar-thumb {
+    background: #ff4b2b;
+    border-radius: 5px;
+  }
+
+  .table-container::-webkit-scrollbar-track {
+    background: #fdfbfb;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  th {
+    background: #ff4b2b;
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    border-right: 1px solid #fff;
+  }
+
+  td {
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    transition: background 0.3s ease;
+    border-right: 1px solid #f3f3f3;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  tr:hover td {
+    background-color: #ffeaea;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f9f9f9;
+  }
+
+  @media (max-width: 992px) {
     #title {
-        font-size: 28px;
-        font-weight: 700;
-        text-align: center;
-        color: #66fcf1;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
+      font-size: 22px;
     }
-
-    .table-container {
-        flex: 1;
-        overflow-y: auto; /* scroll only inside this */
-        overflow-x: auto;
-        border-radius: 12px;
-        border: 1px solid #2b3a42;
-        scrollbar-width: thin;
-        scrollbar-color: #45a29e #1f2833;
+    th, td {
+      font-size: 13px;
+      padding: 10px;
     }
-
-    .table-container::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+    .main-content {
+      padding-top: 70px;
     }
-
-    .table-container::-webkit-scrollbar-thumb {
-        background: #45a29e;
-        border-radius: 5px;
+  }
+  @media (max-width: 600px) {
+    #title {
+      font-size: 20px;
     }
-
-    .table-container::-webkit-scrollbar-track {
-        background: #1f2833;
+    th, td {
+      font-size: 12px;
+      padding: 8px;
     }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border-radius: 10px;
-        overflow: hidden;
+    .main-content {
+      padding-top: 62px;
     }
-
-    th {
-        background: #45a29e;
-        color: #0b0c10;
-        text-align: center;
-        padding: 12px;
-        font-size: 14px;
-        text-transform: uppercase;
-        font-weight: 600;
-        position: sticky;
-        top: 0;
-        z-index: 2; /* keeps header visible while scrolling */
+    .container {
+      padding: 20px 5px;
     }
-
-    td {
-        text-align: center;
-        padding: 12px;
-        font-size: 14px;
-        color: #c5c6c7;
-        background-color: #1f2833;
-        border-bottom: 1px solid #2c3e50;
-        transition: background 0.3s ease;
-    }
-
-    tr:hover td {
-        background-color: rgba(69, 162, 158, 0.25);
-    }
-
-    tr:nth-child(even) td {
-        background-color: #202833;
-    }
-
-    @media (max-width: 992px) {
-        #title {
-            font-size: 22px;
-        }
-
-        th, td {
-            font-size: 13px;
-            padding: 10px;
-        }
-    }
-
-    @media (max-width: 600px) {
-        #title {
-            font-size: 20px;
-        }
-
-        th, td {
-            font-size: 12px;
-            padding: 8px;
-        }
-    }
+  }
 </style>
 
 <body>
-    <div class="container-fluid">
-        <div class="container">
-            <p id="title">View All Remote Users</p>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>User Name</th>
-                            <th>Email</th>
-                            <th>Gender</th>
-                            <th>Address</th>
-                            <th>Mob No</th>
-                            <th>Country</th>
-                            <th>State</th>
-                            <th>City</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for o in objects %}
-                        <tr>
-                            <td>{{ o.username }}</td>
-                            <td>{{ o.email }}</td>
-                            <td>{{ o.gender }}</td>
-                            <td>{{ o.address }}</td>
-                            <td>{{ o.phoneno }}</td>
-                            <td>{{ o.country }}</td>
-                            <td>{{ o.state }}</td>
-                            <td>{{ o.city }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="8" style="color: #ff6666; font-weight: bold;">No Users Found</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <div class="main-content">
+    <div class="container">
+      <p id="title">View All Remote Users</p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Address</th>
+              <th>Mob No</th>
+              <th>Country</th>
+              <th>State</th>
+              <th>City</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for o in objects %}
+            <tr>
+              <td>{{ o.username }}</td>
+              <td>{{ o.email }}</td>
+              <td>{{ o.gender }}</td>
+              <td>{{ o.address }}</td>
+              <td>{{ o.phoneno }}</td>
+              <td>{{ o.country }}</td>
+              <td>{{ o.state }}</td>
+              <td>{{ o.city }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="8" style="color: #ff4b2b; font-weight: bold;">No Users Found</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </body>
 {% endblock %}
