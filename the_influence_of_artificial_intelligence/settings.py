@@ -13,11 +13,8 @@ DEBUG = False
 # DEBUG = True
 
 # REQUIRED FOR RENDER
-ALLOWED_HOSTS = [
-    "*",   # allow render reverse proxy
-]
+ALLOWED_HOSTS = ["*"]
 
-# IMPORTANT FOR HTTPS FORMS ON RENDER
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
     "https://ai-egov-cyber.onrender.com",
@@ -37,7 +34,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # must come right after SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # important for render
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -51,7 +48,10 @@ ROOT_URLCONF = 'the_influence_of_artificial_intelligence.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'Template' / 'htmls'],  # your templates folder
+        
+        # IMPORTANT FIX HERE ✓
+        'DIRS': [BASE_DIR / 'Template' / 'html'], 
+        
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -66,7 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'the_influence_of_artificial_intelligence.wsgi.application'
 
-# DATABASE – SQLite (Render supports)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -81,22 +80,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# INTERNATIONALIZATION
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True  # recommended for older template formatting
+USE_L10N = True
 USE_TZ = True
 
-# STATIC FILES (Render + Whitenoise)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',   # leave this (your actual static folder)
-]
+STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# MEDIA
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
