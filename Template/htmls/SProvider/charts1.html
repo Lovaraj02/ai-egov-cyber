@@ -1,5 +1,8 @@
 {% extends 'SProvider/Header.html' %}
 {% block researchblock %}
+{% load static %}
+
+<link rel="icon" href="{% static 'images/icon.png' %}" type="image/x-icon">
 
 <style>
   body {
@@ -8,20 +11,17 @@
     margin: 0;
     padding: 0;
     color: #333;
-    /* height: 100%; */
   }
 
   .content-wrapper {
-    margin-top: 30px; /* space below navbar */
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     padding: 20px;
     gap: 20px;
     flex-wrap: wrap;
-    /* height: 100%; */
   }
 
-  /* Side Menu */
   .sidemenu {
     background: #ff4b2b;
     color: #fff;
@@ -54,7 +54,6 @@
     color: #ff4b2b;
   }
 
-  /* Chart Container */
   #chartContainer {
     flex: 1;
     min-width: 300px;
@@ -66,7 +65,6 @@
     padding: 10px;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 992px) {
     .content-wrapper {
       flex-direction: column;
@@ -86,14 +84,12 @@
     .sidemenu a {
       font-size: 0.9rem;
       padding: 8px;
-      /* height: 40px; */
     }
-    .content-wrapper{
+    .content-wrapper {
       height: 100vh;
       margin-top: 2px;
     }
-    #chartContainer{
-      /* height: 100px; */
+    #chartContainer {
       margin-bottom: 50px;
     }
   }

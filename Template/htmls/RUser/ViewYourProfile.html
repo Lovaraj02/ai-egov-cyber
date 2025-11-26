@@ -1,7 +1,8 @@
 {% extends 'RUser/Header.html' %}
 {% block userblock %}
+{% load static %}
 
-<link rel="icon" href="images/icon.png" type="image/x-icon" />
+<link rel="icon" href="{% static 'images/icon.png' %}" type="image/x-icon" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -23,7 +24,6 @@
         transition: all 0.3s ease;
     }
 
-    /* Header / Cover */
     .profile-header {
         background: linear-gradient(135deg, #44b9e3, #ff6b6b);
         height: 120px;
@@ -31,7 +31,6 @@
         transition: height 0.3s ease;
     }
 
-    /* Profile Picture */
     .profile-pic {
         width: 90px;
         height: 90px;
@@ -45,7 +44,6 @@
         transition: all 0.3s ease;
     }
 
-    /* User Name */
     .profile-name {
         text-align: center;
         margin-top: 60px;
@@ -65,7 +63,6 @@
         transition: font-size 0.3s ease;
     }
 
-    /* Profile Details Section */
     .profile-body {
         padding: 20px 25px 30px;
         display: grid;
@@ -104,144 +101,59 @@
         word-break: break-word;
     }
 
-    /* ===== Responsive ===== */
-
-    /* Tablets (≤992px) */
+    /* Responsive rules below… (unchanged) */
     @media (max-width: 992px) {
-        .profile-container {
-            max-width: 600px;
-        }
-        .profile-header {
-            height: 100px;
-        }
-        .profile-pic {
-            width: 80px;
-            height: 80px;
-            bottom: -40px;
-        }
-        .profile-name {
-            font-size: 20px;
-            margin-top: 55px;
-        }
-        .profile-subtitle {
-            font-size: 14px;
-        }
-        .detail-value {
-            font-size: 14px;
-        }
+        .profile-container { max-width: 600px; }
+        .profile-header { height: 100px; }
+        .profile-pic { width: 80px; height: 80px; bottom: -40px; }
+        .profile-name { font-size: 20px; margin-top: 55px; }
+        .profile-subtitle { font-size: 14px; }
+        .detail-value { font-size: 14px; }
     }
 
-    /* Small Tablets / Large Phones (≤768px) */
     @media (max-width: 768px) {
-        .profile-container {
-            max-width: 500px;
-        }
-        .profile-header {
-            height: 90px;
-        }
-        .profile-pic {
-            width: 70px;
-            height: 70px;
-            bottom: -35px;
-        }
-        .profile-name {
-            font-size: 18px;
-            margin-top: 50px;
-        }
-        .profile-subtitle {
-            font-size: 13px;
-            margin-bottom: 15px;
-        }
-        .profile-body {
-            padding: 12px 15px 20px;
-            gap: 10px;
-        }
-        .detail-card {
-            padding: 10px 12px;
-        }
+        .profile-container { max-width: 500px; }
+        .profile-header { height: 90px; }
+        .profile-pic { width: 70px; height: 70px; bottom: -35px; }
+        .profile-name { font-size: 18px; margin-top: 50px; }
+        .profile-subtitle { font-size: 13px; margin-bottom: 15px; }
+        .profile-body { padding: 12px 15px 20px; gap: 10px; }
+        .detail-card { padding: 10px 12px; }
     }
 
-    /* Phones (≤480px) */
     @media (max-width: 480px) {
-        .profile-container {
-            max-width: 360px;
-            width: 95%;
-            margin: 15px auto;
-        }
-        .profile-header {
-            height: 55px;
-        }
-        .profile-pic {
-            width: 55px;
-            height: 55px;
-            bottom: -32px;
-        }
-        .profile-name {
-            font-size: 17px;
-            margin-top: 40px;
-        }
-        .profile-subtitle {
-            font-size: 13px;
-            margin-bottom: 10px;
-            display: none;
-        }
-        .profile-body {
-            grid-template-columns: 1fr;
-            gap: 5px;
-            margin-bottom: 10px;
-        }
-        .detail-card {
-            padding: 9px;
-        }
-        .detail-value {
-            font-size: 13.5px;
-        }
+        .profile-container { max-width: 360px; width: 95%; margin: 15px auto; }
+        .profile-header { height: 55px; }
+        .profile-pic { width: 55px; height: 55px; bottom: -32px; }
+        .profile-name { font-size: 17px; margin-top: 40px; }
+        .profile-subtitle { font-size: 13px; margin-bottom: 10px; display: none; }
+        .profile-body { grid-template-columns: 1fr; gap: 5px; margin-bottom: 10px; }
+        .detail-card { padding: 9px; }
+        .detail-value { font-size: 13.5px; }
     }
 
-    /* Very Small Devices (≤360px) */
     @media (max-width: 360px) {
-        .profile-container {
-            width: 95%;
-            max-width: 320px;
-        }
-        .profile-header {
-            height: 70px;
-        }
-        .profile-pic {
-            width: 55px;
-            height: 55px;
-            bottom: -28px;
-        }
-        .profile-name {
-            font-size: 15.5px;
-            margin-top: 40px;
-        }
-        .profile-subtitle {
-            font-size: 12px;
-        }
-        .profile-body {
-            padding: 10px;
-            gap: 6px;
-        }
-        .detail-value {
-            font-size: 13px;
-        }
+        .profile-container { max-width: 320px; width: 95%; }
+        .profile-header { height: 70px; }
+        .profile-pic { width: 55px; height: 55px; bottom: -28px; }
+        .profile-name { font-size: 15.5px; margin-top: 40px; }
+        .profile-subtitle { font-size: 12px; }
+        .profile-body { padding: 10px; gap: 6px; }
+        .detail-value { font-size: 13px; }
     }
 </style>
 
 <body>
     <div class="profile-container">
-        <!-- Header -->
         <div class="profile-header">
             <div class="profile-pic"></div>
         </div>
 
-        <!-- Name + Subtitle -->
         <h2 class="profile-name">{{object.username}}</h2>
         <p class="profile-subtitle">{{object.email}}</p>
 
-        <!-- Details -->
         <div class="profile-body">
+
             <div class="detail-card">
                 <div class="detail-label">Mobile</div>
                 <div class="detail-value">{{object.phoneno}}</div>
@@ -271,6 +183,7 @@
                 <div class="detail-label">City</div>
                 <div class="detail-value">{{object.city}}</div>
             </div>
+
         </div>
     </div>
 </body>

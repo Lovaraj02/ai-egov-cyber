@@ -10,12 +10,12 @@
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #000; /* match theme */
+    background-color: #000;
   }
 
-  /* Adjust spacing below navbar */
+  /* Matches your actual navbar height from SProvider/Header.html */
   .content-wrapper {
-    margin-top: 80px; /* equal to navbar height */
+    margin-top: 72px;
     padding-bottom: 40px;
   }
 
@@ -28,15 +28,13 @@
   }
 
   @media (max-width: 490px){
-    .page-title{
+    .page-title {
       font-size: 1rem;
-      /* margin-bottom: 90px; */ 
-      margin-top: 25px;
+      margin-top: 20px;
     }
     .content-wrapper {
-    margin-top: 10px; /* equal to navbar height */
-    /* padding-bottom: 40px; */
-  }
+      margin-top: 15px;
+    }
   }
 
   .results-card {
@@ -102,7 +100,6 @@
       padding: 10px;
     }
   }
-
 </style>
 
 <div class="content-wrapper">

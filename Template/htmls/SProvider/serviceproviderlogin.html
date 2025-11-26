@@ -22,10 +22,9 @@
       font-family: "Poppins", sans-serif;
       background: linear-gradient(135deg, #fdfbfb, #ebedee);
       color: #333;
-      overflow: hidden;
+      /* overflow removed for Render compatibility */
     }
 
-    /* Navbar */
     .navbar {
       background-color: #ff4b2b;
       padding: 10px 20px;
@@ -49,7 +48,6 @@
       color: #ffe4e1 !important;
     }
 
-    /* Centered Card */
     .mainholder {
       height: calc(100vh - 70px);
       display: flex;
@@ -109,7 +107,6 @@
 </head>
 
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">AI Cyber Portal</a>
@@ -127,20 +124,25 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
   <div class="mainholder">
     <div class="login-card">
       <h4>Admin Login</h4>
+
       <form method="POST" autocomplete="off">
         {% csrf_token %}
         <div class="form-group mb-3">
-          <input type="text" name="username" autocomplete="username" class="form-control" placeholder="Username = Admin" required>
+          <input type="text" name="username" autocomplete="username"
+                 class="form-control" placeholder="Username = Admin" required>
         </div>
+
         <div class="form-group mb-3">
-          <input type="password" name="password" autocomplete="new-password" class="form-control" placeholder="Password = Admin" required>
+          <input type="password" name="password" autocomplete="new-password"
+                 class="form-control" placeholder="Password = Admin" required>
         </div>
+
         <button type="submit" name="submit1" class="btn btn-custom">Login</button>
       </form>
+
       <div class="text-center mt-3 alt-link">
         <p>👉 <a href="{% url 'login' %}">User Login</a></p>
       </div>

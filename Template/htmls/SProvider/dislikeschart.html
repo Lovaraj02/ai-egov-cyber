@@ -1,5 +1,8 @@
 {% extends 'SProvider/Header.html' %}
 {% block researchblock %}
+{% load static %}
+
+<link rel="icon" href="{% static 'images/icon.png' %}" type="image/x-icon">
 
 <style>
     body {
@@ -61,7 +64,6 @@
         height: 500px;
     }
 
-    /* 📱 Responsive adjustments */
     @media screen and (max-width: 992px) {
         .sidemenu {
             width: 180px;

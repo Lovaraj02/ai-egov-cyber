@@ -9,11 +9,10 @@
     margin: 0;
     padding: 0;
     color: #333;
-    /* Remove overflow-y: hidden! */
   }
 
   .main-content {
-    padding-top: 85px;  /* matches navbar height, adjust if needed */
+    padding-top: 85px;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -81,7 +80,7 @@
     width: 80%;
     max-width: 950px;
     min-height: 250px;
-    height: 70vh; /* Responsive height within screen */
+    height: 70vh;
     margin-top: 30px;
     background: #fff;
     border-radius: 10px;
@@ -89,7 +88,6 @@
     padding: 20px;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     #chartContainer {
       width: 95%;
@@ -128,9 +126,7 @@
 window.onload = function() {
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
-    title: {
-      text: ""
-    },
+    title: { text: "" },
     data: [{
       {% if chart_type == "rangeSplineArea" %}
       type: "rangeSplineArea",
@@ -139,6 +135,7 @@ window.onload = function() {
       {% elif chart_type == "spline" %}
       type: "spline",
       {% endif %}
+      
       startAngle: 240,
       yValueFormatString: "##0.00\"%\"",
       indexLabel: "{label} {y}",
@@ -153,21 +150,22 @@ window.onload = function() {
 }
 </script>
 
-<body>
-  <div class="main-content">
-    <div class="topic">
-      <div class="sidemenu">
-        <h3>Bar Chart</h3>
-        <!-- <a href="{% url 'likeschart' 'bar' %}">Bar Chart</a> -->
-      </div>
-      <div id="chartContainer" class="graph"></div>
-      <div class="menu">
-        <table>
-          <!-- Example: Add table if you want chart summary -->
-        </table>
-      </div>
-      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<div class="main-content">
+  <div class="topic">
+    <div class="sidemenu">
+      <h3>Bar Chart</h3>
     </div>
+
+    <div id="chartContainer" class="graph"></div>
+
+    <div class="menu">
+      <table>
+        <!-- optional data table -->
+      </table>
+    </div>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   </div>
-</body>
+</div>
+
 {% endblock %}

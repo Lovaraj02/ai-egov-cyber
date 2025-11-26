@@ -9,20 +9,18 @@
 
 <style>
   html, body {
-    /* background-color: #000000; */
     font-family: 'Righteous', cursive;
     height: 100%;
     margin: 0;
-    /* Do not use overflow-y: hidden! */
   }
 
-  /* --- Fix for content below sticky/fixed navbar --- */
+  /* Fix for content below navbar (navbar height ≈ 70px) */
   .main-content {
-    padding-top: 85px;        /* equal to or greater than navbar height */
+    padding-top: 72px;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;  /* aligns top, not center (prevents big gap) */
+    align-items: flex-start;
   }
 
   .container {
@@ -70,7 +68,7 @@
     border: 2px solid #FF00FF;
   }
 
-  /* --- Responsive adjustments --- */
+  /* Responsive Adjustments */
   @media (max-width: 768px) {
     .container {
       width: 95%;
@@ -84,6 +82,7 @@
       padding-top: 70px;
     }
   }
+
   @media (max-width: 480px) {
     .container {
       width: 100%;
@@ -102,31 +101,33 @@
   }
 </style>
 
-<body>
-  <div class="main-content">
-    <div class="container">
-      <form role="form" method="POST">
-        {% csrf_token %}
-        <fieldset>
-          <p class="style1">View Prediction Of Cyber Attack Type Ratio Details</p>
-          <hr>
-          <div>
-            <table>
-              <tr>
-                <td>View Cyber Attack Type</td>
-                <td>Ratio</td>
-              </tr>
-              {% for object in objs %}
-              <tr>
-                <td style="color:red; font-size:20px; font-family:fantasy">{{object.names}}</td>
-                <td style="background-color:#FF0000; font-family:monospace; font-size:19px; color:yellow;">{{object.ratio}}</td>
-              </tr>
-              {% endfor %}
-            </table>
-          </div>
-        </fieldset>
-      </form>
-    </div>
+<div class="main-content">
+  <div class="container">
+    <form role="form" method="POST">
+      {% csrf_token %}
+      <fieldset>
+        <p class="style1">View Prediction Of Cyber Attack Type Ratio Details</p>
+        <hr>
+
+        <table>
+          <tr>
+            <td>View Cyber Attack Type</td>
+            <td>Ratio</td>
+          </tr>
+
+          {% for object in objs %}
+          <tr>
+            <td style="color:red; font-size:20px; font-family:fantasy">{{ object.names }}</td>
+            <td style="background-color:#FF0000; font-family:monospace; font-size:19px; color:yellow;">
+              {{ object.ratio }}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+
+      </fieldset>
+    </form>
   </div>
-</body>
+</div>
+
 {% endblock %}

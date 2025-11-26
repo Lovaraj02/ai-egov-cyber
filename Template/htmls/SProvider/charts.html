@@ -1,5 +1,8 @@
 {% extends 'SProvider/Header.html' %}
 {% block researchblock %}
+{% load static %}
+
+<link rel="icon" href="{% static 'images/icon.png' %}" type="image/x-icon">
 
 <style>
   body {
@@ -10,9 +13,8 @@
     color: #333;
   }
 
-  /* Page Layout */
   .content-wrapper {
-    margin-top: 90px; /* below navbar */
+    margin-top: 90px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -21,7 +23,6 @@
     flex-wrap: wrap;
   }
 
-  /* Side Menu */
   .sidemenu {
     background: #ff4b2b;
     color: #fff;
@@ -56,7 +57,6 @@
     transform: scale(1.03);
   }
 
-  /* Chart Container */
   #chartContainer {
     flex: 1;
     min-width: 320px;
@@ -68,7 +68,6 @@
     padding: 15px;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 992px) {
     .content-wrapper {
       flex-direction: column;
@@ -127,7 +126,7 @@ window.onload = function() {
 
 <body>
   <div class="content-wrapper">
-    <!-- Side Menu -->
+
     <div class="sidemenu">
       <h3>Chart Types</h3>
       <a href="{% url 'charts' 'pie' %}">Pie Chart</a>
@@ -135,7 +134,6 @@ window.onload = function() {
       <a href="{% url 'charts' 'spline' %}">Spline Chart</a>
     </div>
 
-    <!-- Chart Area -->
     <div id="chartContainer"></div>
   </div>
 

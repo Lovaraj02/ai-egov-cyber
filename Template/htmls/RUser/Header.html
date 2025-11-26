@@ -10,7 +10,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    /* Global Reset */
     * {
       margin: 0;
       padding: 0;
@@ -23,10 +22,9 @@
       font-family: "Poppins", sans-serif;
       background: linear-gradient(135deg, #fdfbfb, #ebedee);
       color: #333;
-      overflow: hidden; /* fully removes vertical and horizontal scroll */
+      /* overflow removed for Render compatibility */
     }
 
-    /* Navbar (Orange Theme) */
     .navbar {
       background-color: #ff4b2b;
       padding: 10px 20px;
@@ -50,12 +48,11 @@
       color: #ffe4e1 !important;
     }
 
-    /* Main Content */
     .mainholder {
       padding: 30px;
       background: transparent;
       height: calc(100vh - 70px);
-      overflow: hidden; /* ensures no inner scroll too */
+      /* overflow removed for correct content rendering */
     }
 
     @media (max-width: 768px) {
@@ -67,7 +64,6 @@
 </head>
 
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">AI Cyber Portal</a>
@@ -87,7 +83,6 @@
     </div>
   </nav>
 
-  <!-- Page Content -->
   <div class="mainholder">
     {% block userblock %}
     {% endblock %}

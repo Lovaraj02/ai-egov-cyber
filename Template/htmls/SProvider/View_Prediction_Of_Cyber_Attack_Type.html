@@ -14,9 +14,11 @@
     font-family: 'Righteous', cursive;
   }
 
-  /* .container-fluid {
-    padding: 30px;
-  } */
+  .main-wrapper {
+    padding-top: 80px; /* navbar height fix */
+    width: 100%;
+    min-height: 100vh;
+  }
 
   .container {
     background-color: white;
@@ -32,18 +34,13 @@
     font-size: 22px;
   }
 
-  .style12 {
-    color: #FFFF00;
-    font-weight: bold;
-  }
-
   .table-container {
     border: 2px solid yellowgreen;
     border-radius: 8px;
-    overflow-x: auto; /* ✅ horizontal scroll only when needed */
-    overflow-y: hidden; /* ✅ prevents vertical scroll */
+    overflow-x: auto;
+    overflow-y: hidden;
     width: 100%;
-    max-height: 80vh; /* keeps it inside screen height */
+    max-height: 80vh;
     margin-top: 20px;
   }
 
@@ -51,7 +48,7 @@
     width: 100%;
     border-collapse: collapse;
     text-align: center;
-    min-width: 1000px; /* ✅ ensures proper table layout */
+    min-width: 1000px;
   }
 
   th, td {
@@ -71,26 +68,24 @@
     font-family: fantasy;
     font-size: 16px;
     background-color: #FFFFFF;
-    word-break: break-word; /* ✅ breaks long text like IPs or logs */
+    word-break: break-word;
   }
 
   @media (max-width: 768px) {
     .container {
       padding: 15px;
     }
-
     th, td {
       font-size: 13px;
       padding: 6px;
     }
-
     .table-container {
       max-height: 70vh;
     }
   }
 </style>
 
-<body>
+<div class="main-wrapper">
   <div class="container-fluid">
     <div class="container">
       <form role="form" method="POST">
@@ -166,6 +161,6 @@
       </form>
     </div>
   </div>
-</body>
+</div>
 
 {% endblock %}
