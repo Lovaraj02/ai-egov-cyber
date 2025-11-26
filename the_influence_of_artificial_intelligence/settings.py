@@ -7,10 +7,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
 
 # for live
-# DEBUG = False
+DEBUG = False
 
 # for local
-DEBUG = True
+# DEBUG = True
 
 # REQUIRED FOR RENDER
 ALLOWED_HOSTS = ["*"]
@@ -50,7 +50,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         
         # IMPORTANT FIX HERE ✓
-        'DIRS': [BASE_DIR / 'Template' / 'html'], 
+        'DIRS': [BASE_DIR / 'Template' / 'htmls'], 
         
         'APP_DIRS': True,
         'OPTIONS': {
