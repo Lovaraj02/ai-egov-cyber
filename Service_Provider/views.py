@@ -1,4 +1,4 @@
-from django.db.models import Count, Avg, Q
+from django.db.models import Avg
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.conf import settings
@@ -11,135 +11,116 @@ from Remote_User.models import (
     detection_accuracy
 )
 
-# custom accuracy wrapper
-from sklearn.metrics import accuracy_score as acf
-def accuracy_score(y_test, y_pred):
-    return acf(y_test, y_pred) + 0.5
-
-
-# ------------------------------
-# Admin Login
-# ------------------------------
+# ---------------------------------------------
+# ADMIN LOGIN
+# ---------------------------------------------
 def serviceproviderlogin(request):
     if request.method == "POST":
-        admin = request.POST.get('username')
-        password = request.POST.get('password')
+        admin = request.POST.get("username")
+        password = request.POST.get("password")
         if admin == "Admin" and password == "Admin":
             detection_accuracy.objects.all().delete()
-            return redirect('View_Remote_Users')
-    return render(request, 'SProvider/serviceproviderlogin.html')
+            return redirect("View_Remote_Users")
+    return render(request, "SProvider/serviceproviderlogin.html")
 
 
-# ------------------------------
-# Prediction Ratio
-# ------------------------------
+# ---------------------------------------------
+# USER LIST
+# ---------------------------------------------
+def View_Remote_Users(request):
+    return render(
+        request,
+        "SProvider/View_Remote_Users.html",
+        {"objects": ClientRegister_Model.objects.all()}
+    )
+
+
+# ---------------------------------------------
+# PREDICTION RATIO
+# ---------------------------------------------
 def View_Prediction_Of_Cyber_Attack_Type_Ratio(request):
 
     detection_ratio.objects.all().delete()
 
     def calc_ratio(keyword):
-        obj = cyber_attack_detection.objects.filter(Prediction=keyword)
         total = cyber_attack_detection.objects.count()
-        if total > 0:
-            ratio = (obj.count() / total) * 100
-            if ratio != 0:
-                detection_ratio.objects.create(names=keyword, ratio=ratio)
+        if total == 0:
+            return
+        count = cyber_attack_detection.objects.filter(Prediction=keyword).count()
+        ratio = (count / total) * 100
+        if ratio > 0:
+            detection_ratio.objects.create(names=keyword, ratio=ratio)
 
-    for k in ['DDoS', 'Intrusion', 'Malware']:
-        calc_ratio(k)
+    for key in ["DDoS", "Intrusion", "Malware"]:
+        calc_ratio(key)
 
     return render(
         request,
-        'SProvider/View_Prediction_Of_Cyber_Attack_Type_Ratio.html',
-        {'objs': detection_ratio.objects.all()}
+        "SProvider/View_Prediction_Of_Cyber_Attack_Type_Ratio.html",
+        {"objs": detection_ratio.objects.all()}
     )
 
 
-# ------------------------------
-# Remote Users
-# ------------------------------
-def View_Remote_Users(request):
-    return render(
-        request,
-        'SProvider/View_Remote_Users.html',
-        {'objects': ClientRegister_Model.objects.all()}
-    )
-
-
-# ------------------------------
-# Charts
-# ------------------------------
+# ---------------------------------------------
+# CHARTS
+# ---------------------------------------------
 def charts(request, chart_type):
-    chart1 = detection_ratio.objects.values('names').annotate(dcount=Avg('ratio'))
-    return render(request, "SProvider/charts.html", {'form': chart1, 'chart_type': chart_type})
+    chart = detection_ratio.objects.values("names").annotate(dcount=Avg("ratio"))
+    return render(request, "SProvider/charts.html", {"form": chart, "chart_type": chart_type})
 
 
 def charts1(request, chart_type):
-    chart1 = detection_accuracy.objects.values('names').annotate(dcount=Avg('ratio'))
-    return render(request, "SProvider/charts1.html", {'form': chart1, 'chart_type': chart_type})
+    chart = detection_accuracy.objects.values("names").annotate(dcount=Avg("ratio"))
+    return render(request, "SProvider/charts1.html", {"form": chart, "chart_type": chart_type})
 
 
 def likeschart(request, like_chart):
-    charts = detection_accuracy.objects.values('names').annotate(dcount=Avg('ratio'))
-    return render(request, "SProvider/likeschart.html", {'form': charts, 'like_chart': like_chart})
+    chart = detection_accuracy.objects.values("names").annotate(dcount=Avg("ratio"))
+    return render(request, "SProvider/likeschart.html", {"form": chart, "like_chart": like_chart})
 
 
-# ------------------------------
-# Predictions
-# ------------------------------
+# ---------------------------------------------
+# VIEW PREDICTIONS
+# ---------------------------------------------
 def View_Prediction_Of_Cyber_Attack_Type(request):
     return render(
         request,
-        'SProvider/View_Prediction_Of_Cyber_Attack_Type.html',
-        {'list_objects': cyber_attack_detection.objects.all()}
+        "SProvider/View_Prediction_Of_Cyber_Attack_Type.html",
+        {"list_objects": cyber_attack_detection.objects.all()}
     )
 
 
-# ------------------------------
-# Download Dataset  (imports moved INSIDE)
-# ------------------------------
+# ---------------------------------------------
+# DOWNLOAD PREDICTED DATA
+# ---------------------------------------------
 def Download_Predicted_DataSets(request):
 
-    from openpyxl import Workbook  # moved here
+    from openpyxl import Workbook  # safe here
 
     response = HttpResponse(
-        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
-    response['Content-Disposition'] = 'attachment; filename="Predicted_Datasets.xlsx"'
+    response["Content-Disposition"] = 'attachment; filename="Predicted_Datasets.xlsx"'
 
     wb = Workbook()
     ws = wb.active
-    ws.title = "Predicted Datasets"
+    ws.title = "Predicted"
 
     headers = [
-        "Fid", "Timestamp", "Source_IP_Address", "Destination_IP_Address",
-        "Source_Port", "Destination_Port", "Protocol", "Packet_Length",
-        "Packet_Type", "Traffic_Type", "Payload_Data", "Malware_Indicators",
-        "Anomaly_Scores", "Alerts_Warnings", "Attack_Signature", "Action_Taken",
-        "Severity_Level", "Device_Information", "Network_Segment",
-        "Geo_City_location_Data", "Proxy_Information", "Firewall_Logs",
-        "IDS_IPS_Alerts", "Log_Source", "Prediction"
+        field.name for field in cyber_attack_detection._meta.fields
     ]
     ws.append(headers)
 
-    for r in cyber_attack_detection.objects.all():
-        ws.append([
-            r.Fid, r.Timestamp, r.Source_IP_Address, r.Destination_IP_Address,
-            r.Source_Port, r.Destination_Port, r.Protocol, r.Packet_Length,
-            r.Packet_Type, r.Traffic_Type, r.Payload_Data, r.Malware_Indicators,
-            r.Anomaly_Scores, r.Alerts_Warnings, r.Attack_Signature, r.Action_Taken,
-            r.Severity_Level, r.Device_Information, r.Network_Segment,
-            r.Geo_City_location_Data, r.Proxy_Information, r.Firewall_Logs,
-            r.IDS_IPS_Alerts, r.Log_Source, r.Prediction
-        ])
+    for obj in cyber_attack_detection.objects.all():
+        ws.append([getattr(obj, field) for field in headers])
 
     wb.save(response)
     return response
 
 
-# ------------------------------
-# Train Model  (all heavy imports moved INSIDE)
-# ------------------------------
+# ---------------------------------------------
+# TRAIN MODEL (FAST after first run)
+# ---------------------------------------------
 def train_model(request):
 
     if detection_accuracy.objects.exists():
@@ -149,6 +130,7 @@ def train_model(request):
             {"objs": detection_accuracy.objects.all()}
         )
 
+    # heavy imports only inside
     import pandas as pd
     from sklearn.feature_extraction.text import CountVectorizer
     from sklearn.model_selection import train_test_split
@@ -157,18 +139,16 @@ def train_model(request):
     from sklearn.svm import SVC
     from sklearn.tree import DecisionTreeClassifier
     from sklearn.ensemble import GradientBoostingClassifier
-    from sklearn.metrics import accuracy_score as sk_acc
+    from sklearn.metrics import accuracy_score
 
     df = pd.read_csv(os.path.join(settings.BASE_DIR, "Datasets.csv"))
 
-    def apply_response(label):
-        return {"Malware": 0, "DDoS": 1, "Intrusion": 2}.get(label, 0)
-
-    df['results'] = df['Attack_Type'].apply(apply_response)
+    mapping = {"Malware": 0, "DDoS": 1, "Intrusion": 2}
+    df["results"] = df["Attack_Type"].apply(lambda x: mapping[x])
 
     cv = CountVectorizer()
-    X = cv.fit_transform(df['Payload_Data'])
-    y = df['results']
+    X = cv.fit_transform(df["Payload_Data"])
+    y = df["results"]
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
 
@@ -184,7 +164,7 @@ def train_model(request):
 
     for name, model in models:
         model.fit(X_train, y_train)
-        acc = sk_acc(y_test, model.predict(X_test)) * 100
+        acc = accuracy_score(y_test, model.predict(X_test)) * 100
         objs.append(detection_accuracy(names=name, ratio=acc))
 
     detection_accuracy.objects.bulk_create(objs)

@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-from django.db.models import CASCADE
-
 
 class ClientRegister_Model(models.Model):
     username = models.CharField(max_length=30)
@@ -12,11 +9,8 @@ class ClientRegister_Model(models.Model):
     country = models.CharField(max_length=20)
     state = models.CharField(max_length=30)
     city = models.CharField(max_length=30)
-    gender= models.CharField(max_length=10)
-    address= models.CharField(max_length=20)
- 
-
-
+    gender = models.CharField(max_length=10)
+    address = models.CharField(max_length=20)
 
 
 class cyber_attack_detection(models.Model):
@@ -47,18 +41,11 @@ class cyber_attack_detection(models.Model):
     Prediction = models.TextField(null=True, blank=True)
 
 
-
-
-
 class detection_accuracy(models.Model):
-
     names = models.CharField(max_length=300)
-    ratio = models.CharField(max_length=300)
+    ratio = models.FloatField()  # store accuracy as float
+
 
 class detection_ratio(models.Model):
-
     names = models.CharField(max_length=300)
-    ratio = models.CharField(max_length=300)
-
-
-
+    ratio = models.FloatField()  # store percentage as float

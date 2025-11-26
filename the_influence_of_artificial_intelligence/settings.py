@@ -5,15 +5,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
+
+# for live
+# DEBUG = False
+
 # for local
-# DEBUG = True
+DEBUG = True
 
-# for live server
-DEBUG = False
+# REQUIRED FOR RENDER
+ALLOWED_HOSTS = [
+    "*",   # allow render reverse proxy
+]
 
-ALLOWED_HOSTS = ['*']
+# IMPORTANT FOR HTTPS FORMS ON RENDER
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com",
+    "https://ai-egov-cyber.onrender.com",
+]
 
-# APPLICATIONS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,10 +35,9 @@ INSTALLED_APPS = [
     'Service_Provider',
 ]
 
-# MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # must be right after security
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # must come right after SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,11 +48,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'the_influence_of_artificial_intelligence.urls'
 
-# TEMPLATES
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'Template' / 'htmls'],  # your template folder
+        'DIRS': [BASE_DIR / 'Template' / 'htmls'],  # your templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -59,7 +66,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'the_influence_of_artificial_intelligence.wsgi.application'
 
-# DATABASE (SQLite for now)
+# DATABASE – SQLite (Render supports)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -67,7 +74,6 @@ DATABASES = {
     }
 }
 
-# PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -79,13 +85,13 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True
+USE_L10N = True  # recommended for older template formatting
 USE_TZ = True
 
-# STATIC FILES (IMPORTANT)
+# STATIC FILES (Render + Whitenoise)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',     # your new correct static folder
+    BASE_DIR / 'static',   # leave this (your actual static folder)
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
